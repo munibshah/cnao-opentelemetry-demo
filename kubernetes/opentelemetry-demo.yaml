@@ -8180,6 +8180,7 @@ metadata:
     app.kubernetes.io/part-of: opentelemetry-demo
   annotations:
     instrumentation.opentelemetry.io/inject-python: "true"
+    sidecar.opentelemetry.io/inject: "true"
 spec:
   selector:
     matchLabels:
