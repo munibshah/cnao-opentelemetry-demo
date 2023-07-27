@@ -6296,10 +6296,10 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8080
-      name: tcp-service
-      targetPort: 8080
-      NodePort: 30080
+    - protocol: TCP
+      port: 8080 # The port on which the service is listening
+      targetPort: 8080 # The port the containers are listening on
+      nodePort: 30080
   selector:
     opentelemetry.io/name: opentelemetry-demo-frontendproxy
 ---
