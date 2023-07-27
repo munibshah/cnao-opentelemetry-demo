@@ -11,7 +11,6 @@ metadata:
     app.kubernetes.io/instance: opentelemetry-demo
     app.kubernetes.io/version: "9.4.7"
   name: opentelemetry-demo-grafana
-  namespace: otel-demo
 ---
 # Source: opentelemetry-demo/charts/jaeger/templates/allinone-sa.yaml
 apiVersion: v1
@@ -45,7 +44,6 @@ metadata:
     chart: prometheus-20.2.0
     heritage: Helm
   name: opentelemetry-demo-prometheus-server
-  namespace: otel-demo
   annotations:
     {}
 ---
@@ -67,7 +65,6 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: opentelemetry-demo-grafana
-  namespace: otel-demo
   labels:
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: opentelemetry-demo
@@ -83,7 +80,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: opentelemetry-demo-grafana
-  namespace: otel-demo
   labels:
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: opentelemetry-demo
@@ -271,7 +267,6 @@ metadata:
     chart: prometheus-20.2.0
     heritage: Helm
   name: opentelemetry-demo-prometheus-server
-  namespace: otel-demo
 data:
   allow-snippet-annotations: "false"
   alerting_rules.yml: |
@@ -292,8 +287,6 @@ data:
     - honor_labels: true
       job_name: opentelemetry-community-demo
       kubernetes_sd_configs:
-      - namespaces:
-          own_namespace: true
         role: pod
       relabel_configs:
       - action: keep
@@ -5867,7 +5860,6 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: opentelemetry-demo-grafana
-    namespace: otel-demo
 roleRef:
   kind: ClusterRole
   name: opentelemetry-demo-grafana-clusterrole
@@ -5887,7 +5879,6 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: opentelemetry-demo-prometheus-server
-    namespace: otel-demo
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -5898,7 +5889,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: opentelemetry-demo-grafana
-  namespace: otel-demo
   labels:
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: opentelemetry-demo
@@ -5910,7 +5900,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: opentelemetry-demo-grafana
-  namespace: otel-demo
   labels:
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: opentelemetry-demo
@@ -5922,14 +5911,12 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: opentelemetry-demo-grafana
-  namespace: otel-demo
 ---
 # Source: opentelemetry-demo/charts/grafana/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: opentelemetry-demo-grafana
-  namespace: otel-demo
   labels:
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: opentelemetry-demo
@@ -6101,7 +6088,6 @@ metadata:
     chart: prometheus-20.2.0
     heritage: Helm
   name: opentelemetry-demo-prometheus-server
-  namespace: otel-demo
 spec:
   ports:
     - name: http
@@ -6517,7 +6503,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: opentelemetry-demo-grafana
-  namespace: otel-demo
   labels:
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: opentelemetry-demo
@@ -6832,7 +6817,6 @@ metadata:
     chart: prometheus-20.2.0
     heritage: Helm
   name: opentelemetry-demo-prometheus-server
-  namespace: otel-demo
 spec:
   selector:
     matchLabels:
@@ -8537,7 +8521,6 @@ metadata:
     app.kubernetes.io/instance: opentelemetry-demo
     app.kubernetes.io/version: "9.4.7"
   name: opentelemetry-demo-grafana-test
-  namespace: otel-demo
   annotations:
 ---
 # Source: opentelemetry-demo/charts/grafana/templates/tests/test-configmap.yaml
@@ -8545,7 +8528,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: opentelemetry-demo-grafana-test
-  namespace: otel-demo
   annotations:
   labels:
     app.kubernetes.io/name: grafana
@@ -8570,7 +8552,6 @@ metadata:
     app.kubernetes.io/instance: opentelemetry-demo
     app.kubernetes.io/version: "9.4.7"
   annotations:
-  namespace: otel-demo
 spec:
   serviceAccountName: opentelemetry-demo-grafana-test
   containers:
