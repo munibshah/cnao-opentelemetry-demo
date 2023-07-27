@@ -6278,7 +6278,6 @@ spec:
     - port: 8080
       name: tcp-service
       targetPort: 8080
-      NodePort: 30080
   selector:
     opentelemetry.io/name: opentelemetry-demo-frontend
 ---
@@ -6300,6 +6299,7 @@ spec:
     - port: 8080
       name: tcp-service
       targetPort: 8080
+      NodePort: 30080
   selector:
     opentelemetry.io/name: opentelemetry-demo-frontendproxy
 ---
