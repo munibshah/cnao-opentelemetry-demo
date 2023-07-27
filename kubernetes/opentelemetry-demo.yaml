@@ -157,16 +157,19 @@ data:
     connectors:
       spanmetrics: null
     exporters:
-      logging: {}
-      otlp:
-        endpoint: 'opentelemetry-demo-jaeger-collector:4317'
+      logging:
+        verbosity: detailed
+      zipkin:
+        endpoint: "http://ec2-44-232-240-174.us-west-2.compute.amazonaws.com:9411/api/v2/spans"
+        format: proto
+      otlp/jaeger:
+        endpoint: "ec2-44-232-240-174.us-west-2.compute.amazonaws.com:5317"
         tls:
           insecure: true
-      prometheus:
-        enable_open_metrics: true
-        endpoint: 0.0.0.0:9464
-        resource_to_telemetry_conversion:
-          enabled: true
+      otlphttp/appdotelcol:
+        endpoint: http://appdynamics-otel-collector-service.cnao.svc.cluster.local:4318
+        tls:
+          insecure: true
     extensions:
       health_check: {}
       memory_ballast:
@@ -222,38 +225,17 @@ data:
       - health_check
       - memory_ballast
       pipelines:
-        logs:
-          exporters:
-          - logging
-          processors:
-          - memory_limiter
-          - batch
-          receivers:
-          - otlp
         metrics:
-          exporters:
-          - prometheus
-          - logging
-          processors:
-          - memory_limiter
-          - filter/ottl
-          - transform
-          - batch
-          receivers:
-          - otlp
-          - spanmetrics
+          receivers: [otlp]
+          processors: []
+          exporters: [logging, otlphttp/appdotelcol]
         traces:
-          exporters:
-          - otlp
-          - logging
-          - spanmetrics
-          processors:
-          - memory_limiter
-          - batch
-          receivers:
-          - otlp
-          - jaeger
-          - zipkin
+          receivers: [otlp]
+          processors: []
+          exporters: [logging, zipkin, otlp/jaeger, otlphttp/appdotelcol]
+        logs:
+          receivers: [otlp]
+          exporters: [logging, otlphttp/appdotelcol]
       telemetry:
         metrics:
           address: ${env:MY_POD_IP}:8888
