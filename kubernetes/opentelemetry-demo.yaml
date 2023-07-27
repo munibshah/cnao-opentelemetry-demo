@@ -7862,6 +7862,8 @@ spec:
             value: 'opentelemetry-demo-jaeger-query'
           - name: OTEL_COLLECTOR_PORT_GRPC
             value: "4317"
+          - name: OTEL_COLLECTOR_PORT
+            value: "4317"
           - name: OTEL_COLLECTOR_PORT_HTTP
             value: "4318"
           - name: OTEL_COLLECTOR_HOST
