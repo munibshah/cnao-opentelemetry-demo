@@ -6822,36 +6822,35 @@ spec:
             items:
               - key: relay
                 path: relay.yaml
-            name: otc-internal
         - name: tlsotelreceiversecrets
           secret:
             defaultMode: 420
             items:
-            - key: ca.crt
-              path: ca.crt
-            - key: tls.crt
-              path: tls.crt
-            - key: tls.key
-              path: tls.key
+              - key: ca.crt
+                path: ca.crt
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
             secretName: server-secret
         - name: kube-api-access-92k78
           projected:
             defaultMode: 420
             sources:
-            - serviceAccountToken:
-                expirationSeconds: 3607
-                path: token
-            - configMap:
-                items:
-                - key: ca.crt
-                  path: ca.crt
-                name: kube-root-ca.crt
-            - downwardAPI:
-                items:
-                - fieldRef:
-                    apiVersion: v1
-                    fieldPath: metadata.namespace
-                  path: namespace
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+                  name: kube-root-ca.crt
+              - downwardAPI:
+                  items:
+                    - fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+                      path: namespace
             hostNetwork: false
 ---
 # Source: opentelemetry-demo/charts/prometheus/templates/deploy.yaml
