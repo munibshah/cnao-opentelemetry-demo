@@ -213,43 +213,6 @@ data:
         check_interval: 5s
         limit_mib: 819
         spike_limit_mib: 256
-    receivers:
-      otlp:
-        protocols:
-          grpc:
-            endpoint: 0.0.0.0:4317
-            tls:
-              ca_file: /etc/otel/certs/receiver/ca.crt
-              cert_file: /etc/otel/certs/receiver/tls.crt
-              key_file: /etc/otel/certs/receiver/tls.key
-              max_version: 1.3
-              min_version: 1.2
-          http:
-            endpoint: 0.0.0.0:4318
-            tls:
-              ca_file: /etc/otel/certs/receiver/ca.crt
-              cert_file: /etc/otel/certs/receiver/tls.crt
-              key_file: /etc/otel/certs/receiver/tls.key
-              max_version: 1.3
-              min_version: 1.2
-      otlp/lca:
-        protocols:
-          grpc:
-            endpoint: 0.0.0.0:14317
-            tls:
-              ca_file: /etc/otel/certs/receiver/ca.crt
-              cert_file: /etc/otel/certs/receiver/tls.crt
-              key_file: /etc/otel/certs/receiver/tls.key
-              max_version: 1.3
-              min_version: 1.2
-          http:
-            endpoint: 0.0.0.0:14318
-            tls:
-              ca_file: /etc/otel/certs/receiver/ca.crt
-              cert_file: /etc/otel/certs/receiver/tls.crt
-              key_file: /etc/otel/certs/receiver/tls.key
-              max_version: 1.3
-              min_version: 1.2
     service:
       extensions:
       - health_check
