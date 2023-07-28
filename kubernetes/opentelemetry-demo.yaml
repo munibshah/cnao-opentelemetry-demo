@@ -219,17 +219,17 @@ data:
           grpc:
             endpoint: 0.0.0.0:4317
             tls:
-              ca_file: /etc/otel/certs/receiver/ca.crt
-              cert_file: /etc/otel/certs/receiver/tls.crt
-              key_file: /etc/otel/certs/receiver/tls.key
+              ca_file: /certs/ca.crt
+              cert_file: /certs/tls.crt
+              key_file: /certs/tls.key
               max_version: 1.3
               min_version: 1.2
           http:
             endpoint: 0.0.0.0:4318
             tls:
-              ca_file: /etc/otel/certs/receiver/ca.crt
-              cert_file: /etc/otel/certs/receiver/tls.crt
-              key_file: /etc/otel/certs/receiver/tls.key
+              ca_file: /certs/ca.crt
+              cert_file: /certs/tls.crt
+              key_file: /certs/tls.key
               max_version: 1.3
               min_version: 1.2
       otlp/lca:
@@ -237,17 +237,17 @@ data:
           grpc:
             endpoint: 0.0.0.0:14317
             tls:
-              ca_file: /etc/otel/certs/receiver/ca.crt
-              cert_file: /etc/otel/certs/receiver/tls.crt
-              key_file: /etc/otel/certs/receiver/tls.key
+              ca_file: /certs/ca.crt
+              cert_file: /certs/tls.crt
+              key_file: /certs/tls.key
               max_version: 1.3
               min_version: 1.2
           http:
             endpoint: 0.0.0.0:14318
             tls:
-              ca_file: /etc/otel/certs/receiver/ca.crt
-              cert_file: /etc/otel/certs/receiver/tls.crt
-              key_file: /etc/otel/certs/receiver/tls.key
+              ca_file: /certs/ca.crt
+              cert_file: /certs/tls.crt
+              key_file: /certs/tls.key
               max_version: 1.3
               min_version: 1.2
     service:
@@ -6815,6 +6815,8 @@ spec:
           volumeMounts:
             - mountPath: /conf
               name: opentelemetry-collector-configmap
+            - mountPath: /certs
+              name: tlsotelreceiversecrets
       volumes:
         - name: opentelemetry-collector-configmap
           configMap:
