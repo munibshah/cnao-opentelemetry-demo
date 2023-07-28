@@ -8295,11 +8295,11 @@ spec:
       containers:
         - name: recommendationservice
           image: "ghcr.io/open-telemetry/demo:1.4.0-recommendationservice"
-          args:
-            [
-              "-c",
-              'OTEL_RESOURCE_ATTRIBUTES=$OTEL_RESOURCE_ATTRIBUTES,container.id=$(sed -rn "1s#./##; 1s/cri-containerd-(.{64})./\1/p" /proc/self/cgroup) && python3 $APP_HOME/app.py',
-            ]
+          # args:
+          #   [
+          #     "-c",
+          #     'OTEL_RESOURCE_ATTRIBUTES=$OTEL_RESOURCE_ATTRIBUTES,container.id=$(sed -rn "1s#./##; 1s/cri-containerd-(.{64})./\1/p" /proc/self/cgroup) && python3 $APP_HOME/app.py',
+          #   ]
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
