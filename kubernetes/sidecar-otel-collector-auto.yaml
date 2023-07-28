@@ -24,7 +24,7 @@ spec:
         tls:
           insecure: true
       otlphttp/appdotelcol:
-        endpoint: http://opentelemetry-demo-otelcol.otel-demo.svc.cluster.local:4318
+        endpoint: http://opentelemetry-demo-otelcol:4318
         tls:
           insecure: true
     service:
