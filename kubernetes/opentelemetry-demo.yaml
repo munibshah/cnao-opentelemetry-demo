@@ -213,6 +213,43 @@ data:
         check_interval: 5s
         limit_mib: 819
         spike_limit_mib: 256
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+            tls:
+              ca_file: /etc/otel/certs/receiver/ca.crt
+              cert_file: /etc/otel/certs/receiver/tls.crt
+              key_file: /etc/otel/certs/receiver/tls.key
+              max_version: 1.3
+              min_version: 1.2
+          http:
+            endpoint: 0.0.0.0:4318
+            tls:
+              ca_file: /etc/otel/certs/receiver/ca.crt
+              cert_file: /etc/otel/certs/receiver/tls.crt
+              key_file: /etc/otel/certs/receiver/tls.key
+              max_version: 1.3
+              min_version: 1.2
+      otlp/lca:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:14317
+            tls:
+              ca_file: /etc/otel/certs/receiver/ca.crt
+              cert_file: /etc/otel/certs/receiver/tls.crt
+              key_file: /etc/otel/certs/receiver/tls.key
+              max_version: 1.3
+              min_version: 1.2
+          http:
+            endpoint: 0.0.0.0:14318
+            tls:
+              ca_file: /etc/otel/certs/receiver/ca.crt
+              cert_file: /etc/otel/certs/receiver/tls.crt
+              key_file: /etc/otel/certs/receiver/tls.key
+              max_version: 1.3
+              min_version: 1.2
     service:
       extensions:
       - health_check
@@ -6785,7 +6822,37 @@ spec:
             items:
               - key: relay
                 path: relay.yaml
-      hostNetwork: false
+          name: otc-internal
+        - name: tlsotelreceiversecrets
+          secret:
+            defaultMode: 420
+            items:
+            - key: ca.crt
+              path: ca.crt
+            - key: tls.crt
+              path: tls.crt
+            - key: tls.key
+              path: tls.key
+            secretName: server-secret
+        - name: kube-api-access-92k78
+          projected:
+            defaultMode: 420
+            sources:
+            - serviceAccountToken:
+                expirationSeconds: 3607
+                path: token
+            - configMap:
+                items:
+                - key: ca.crt
+                  path: ca.crt
+                name: kube-root-ca.crt
+            - downwardAPI:
+                items:
+                - fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+                  path: namespace
+            hostNetwork: false
 ---
 # Source: opentelemetry-demo/charts/prometheus/templates/deploy.yaml
 apiVersion: apps/v1
