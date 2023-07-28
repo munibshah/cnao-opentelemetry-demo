@@ -6822,7 +6822,7 @@ spec:
             items:
               - key: relay
                 path: relay.yaml
-          name: otc-internal
+            name: otc-internal
         - name: tlsotelreceiversecrets
           secret:
             defaultMode: 420
