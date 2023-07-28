@@ -169,7 +169,12 @@ data:
       otlphttp/appdotelcol:
         endpoint: http://appdynamics-otel-collector-service.cnao.svc.cluster.local:4318
         tls:
-          insecure: true
+          insecure: false
+          ca_file: ca.crt
+          cert_file: tls.crt
+          key_file: tls.key
+          min_version: "1.1"
+          max_version: "1.2"
     extensions:
       health_check: {}
       memory_ballast:
