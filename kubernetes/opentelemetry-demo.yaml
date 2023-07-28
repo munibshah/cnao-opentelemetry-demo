@@ -159,91 +159,149 @@ data:
     exporters:
       logging:
         verbosity: detailed
-      zipkin:
-        endpoint: "http://ec2-44-232-240-174.us-west-2.compute.amazonaws.com:9411/api/v2/spans"
-        format: proto
-      otlp/jaeger:
-        endpoint: "ec2-44-232-240-174.us-west-2.compute.amazonaws.com:5317"
-        tls:
-          insecure: true
-      otlphttp/appdotelcol:
-        endpoint: http://appdynamics-otel-collector-service.cnao.svc.cluster.local:4318
-        tls:
-          insecure: false
-          ca_file: ca.crt
-          cert_file: tls.crt
-          key_file: tls.key
-          min_version: "1.1"
-          max_version: "1.2"
+      otlphttp:
+        auth:
+          authenticator: oauth2client
+        logs_endpoint: https://cisco-cx-services.observe.appdynamics.com/data/v1/logs
+        metrics_endpoint: https://cisco-cx-services.observe.appdynamics.com/data/v1/metrics
+        retry_on_failure:
+          max_elapsed_time: 180
+        traces_endpoint: https://cisco-cx-services.observe.appdynamics.com/data/v1/trace
     extensions:
-      health_check: {}
-      memory_ballast:
-        size_in_percentage: 40
+      health_check:
+        endpoint: 0.0.0.0:13133
+      oauth2client:
+        client_id: agt_KIld8hxIqsXBFzvvLDWsW
+        client_secret: WrZNeE4DOCTogGglIsCN_G1jeH9cyFCnr0e06oWMozY
+        token_url: https://cisco-cx-services.observe.appdynamics.com/auth/4d5a5d7d-553b-4aff-bb04-68382a1015da/default/oauth2/token
+      zpages:
+        endpoint: 0.0.0.0:55679
     processors:
-      batch: {}
-      filter/ottl:
-        error_mode: ignore
-        metrics:
-          metric:
-          - name == "queueSize"
+      batch:
+        send_batch_max_size: 1000
+        send_batch_size: 1000
+        timeout: 10s
+      batch/logs:
+        send_batch_max_size: 1000
+        send_batch_size: 1000
+        timeout: 10s
+      batch/metrics:
+        send_batch_max_size: 1000
+        send_batch_size: 1000
+        timeout: 10s
+      batch/traces:
+        send_batch_max_size: 1000
+        send_batch_size: 1000
+        timeout: 10s
+      filter/appd:
+        logs:
+          include:
+            match_type: strict
+            resource_attributes:
+            - key: telemetry.sdk.name
+              value: infra-agent
+      filter/non_appd:
+        logs:
+          exclude:
+            match_type: strict
+            resource_attributes:
+            - key: telemetry.sdk.name
+              value: infra-agent
+      k8sattributes:
+        passthrough: false
       memory_limiter:
         check_interval: 5s
-        limit_percentage: 80
-        spike_limit_percentage: 25
-      transform:
-        metric_statements:
-        - context: metric
-          statements:
-          - set(description, "Measures the duration of inbound HTTP requests") where name
-            == "http.server.duration"
+        limit_mib: 819
+        spike_limit_mib: 256
     receivers:
-      jaeger:
-        protocols:
-          grpc:
-            endpoint: ${env:MY_POD_IP}:14250
-          thrift_compact:
-            endpoint: ${env:MY_POD_IP}:6831
-          thrift_http:
-            endpoint: ${env:MY_POD_IP}:14268
       otlp:
         protocols:
           grpc:
-            endpoint: ${env:MY_POD_IP}:4317
+            endpoint: 0.0.0.0:4317
+            tls:
+              ca_file: /etc/otel/certs/receiver/ca.crt
+              cert_file: /etc/otel/certs/receiver/tls.crt
+              key_file: /etc/otel/certs/receiver/tls.key
+              max_version: 1.3
+              min_version: 1.2
           http:
-            cors:
-              allowed_origins:
-              - http://*
-              - https://*
             endpoint: 0.0.0.0:4318
-      prometheus:
-        config:
-          scrape_configs:
-          - job_name: opentelemetry-collector
-            scrape_interval: 10s
-            static_configs:
-            - targets:
-              - ${env:MY_POD_IP}:8888
-      zipkin:
-        endpoint: ${env:MY_POD_IP}:9411
+            tls:
+              ca_file: /etc/otel/certs/receiver/ca.crt
+              cert_file: /etc/otel/certs/receiver/tls.crt
+              key_file: /etc/otel/certs/receiver/tls.key
+              max_version: 1.3
+              min_version: 1.2
+      otlp/lca:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:14317
+            tls:
+              ca_file: /etc/otel/certs/receiver/ca.crt
+              cert_file: /etc/otel/certs/receiver/tls.crt
+              key_file: /etc/otel/certs/receiver/tls.key
+              max_version: 1.3
+              min_version: 1.2
+          http:
+            endpoint: 0.0.0.0:14318
+            tls:
+              ca_file: /etc/otel/certs/receiver/ca.crt
+              cert_file: /etc/otel/certs/receiver/tls.crt
+              key_file: /etc/otel/certs/receiver/tls.key
+              max_version: 1.3
+              min_version: 1.2
     service:
       extensions:
       - health_check
-      - memory_ballast
+      - oauth2client
       pipelines:
-        metrics:
-          receivers: [otlp]
-          processors: []
-          exporters: [logging, otlphttp/appdotelcol]
-        traces:
-          receivers: [otlp]
-          processors: []
-          exporters: [logging, zipkin, otlp/jaeger, otlphttp/appdotelcol]
         logs:
-          receivers: [otlp]
-          exporters: [logging, otlphttp/appdotelcol]
-      telemetry:
+          exporters:
+          - otlphttp
+          processors:
+          - memory_limiter
+          - filter/non_appd
+          - k8sattributes
+          - batch/logs
+          receivers:
+          - otlp
+        logs/appd:
+          exporters:
+          - otlphttp
+          processors:
+          - memory_limiter
+          - filter/appd
+          - batch
+          receivers:
+          - otlp
+        logs/lca:
+          exporters:
+          - otlphttp
+          processors:
+          - memory_limiter
+          receivers:
+          - otlp/lca
         metrics:
-          address: ${env:MY_POD_IP}:8888
+          exporters:
+          - otlphttp
+          processors:
+          - memory_limiter
+          - batch/metrics
+          receivers:
+          - otlp
+        traces:
+          exporters:
+          - otlphttp
+          processors:
+          - memory_limiter
+          - k8sattributes
+          - batch/traces
+          receivers:
+          - otlp
+      telemetry:
+        traces:
+          propagators:
+          - tracecontext
 ---
 # Source: opentelemetry-demo/charts/prometheus/templates/cm.yaml
 apiVersion: v1
