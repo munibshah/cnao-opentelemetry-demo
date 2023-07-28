@@ -5913,15 +5913,7 @@ roleRef:
   kind: ClusterRole
   name: opentelemetry-demo-grafana-clusterrole
   apiGroup: rbac.authorization.k8s.io
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: otel-collector
-rules:
-  - apiGroups: [""]
-    resources: ["pods", "namespaces"]
-    verbs: ["get", "watch", "list"]
+
 ---
 # Source: opentelemetry-demo/charts/prometheus/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
