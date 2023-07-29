@@ -6957,7 +6957,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdynamics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: KAFKA_SERVICE_ADDR
@@ -7037,7 +7037,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdynamics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: AD_SERVICE_PORT
@@ -7113,7 +7113,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: CART_SERVICE_PORT
@@ -7197,7 +7197,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: CHECKOUT_SERVICE_PORT
@@ -7291,7 +7291,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: CURRENCY_SERVICE_PORT
@@ -7363,7 +7363,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: EMAIL_SERVICE_PORT
@@ -7439,7 +7439,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: FEATURE_FLAG_SERVICE_PORT
@@ -7531,7 +7531,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: POSTGRES_DB
@@ -7606,7 +7606,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: KAFKA_SERVICE_ADDR
@@ -7686,7 +7686,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: FRONTEND_PORT
@@ -7782,7 +7782,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: ENVOY_PORT
@@ -7886,7 +7886,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: KAFKA_ADVERTISED_LISTENERS
@@ -7964,7 +7964,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: LOCUST_WEB_PORT
@@ -8048,7 +8048,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: PAYMENT_SERVICE_PORT
@@ -8124,7 +8124,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: PRODUCT_CATALOG_SERVICE_PORT
@@ -8198,7 +8198,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: QUOTE_SERVICE_PORT
@@ -8287,7 +8287,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: RECOMMENDATION_SERVICE_PORT
@@ -8367,7 +8367,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdyna\mics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: OTEL_RESOURCE_ATTRIBUTES
@@ -8439,7 +8439,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdynamics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: SHIPPING_SERVICE_PORT
