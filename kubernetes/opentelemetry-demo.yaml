@@ -7037,7 +7037,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdynamics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: AD_SERVICE_PORT
@@ -7113,7 +7113,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.uid
             - name: OTEL_COLLECTOR_NAME
-              value: "opentelemetry-demo-otelcol"
+              value: "opentelemetry-demo-otelcol-appdynamics-ote-collector"
             - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
               value: cumulative
             - name: CART_SERVICE_PORT
