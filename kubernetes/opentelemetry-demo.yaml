@@ -6023,14 +6023,17 @@ metadata:
     app.kubernetes.io/version: "1.42.0"
     app.kubernetes.io/component: service-query
 spec:
-  clusterIP: None
+  type: NodePort
   ports:
-    - name: http-query
+    - nodePort: 36686
       port: 16686
+      protocol: TCP
       targetPort: 16686
-    - name: grpc-query
+    - nodePort: 36685
       port: 16685
+      protocol: TCP
       targetPort: 16685
+
   selector:
     app.kubernetes.io/name: jaeger
     app.kubernetes.io/instance: opentelemetry-demo
