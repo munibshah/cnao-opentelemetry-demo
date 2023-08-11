@@ -8202,9 +8202,6 @@ metadata:
     app.kubernetes.io/name: opentelemetry-demo-recommendationservice
     app.kubernetes.io/version: "1.4.0"
     app.kubernetes.io/part-of: opentelemetry-demo
-  annotations:
-    instrumentation.opentelemetry.io/inject-python: "true"
-    sidecar.opentelemetry.io/inject: "true"
 spec:
   selector:
     matchLabels:
@@ -8216,19 +8213,11 @@ spec:
         app.kubernetes.io/instance: opentelemetry-demo
         app.kubernetes.io/component: recommendationservice
         app.kubernetes.io/name: opentelemetry-demo-recommendationservice
-      annotations:
-        instrumentation.opentelemetry.io/inject-python: "true"
-        sidecar.opentelemetry.io/inject: "true"
     spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: recommendationservice
           image: "ghcr.io/open-telemetry/demo:1.4.0-recommendationservice"
-          # args:
-          #   [
-          #     "-c",
-          #     'OTEL_RESOURCE_ATTRIBUTES=$OTEL_RESOURCE_ATTRIBUTES,container.id=$(sed -rn "1s#./##; 1s/cri-containerd-(.{64})./\1/p" /proc/self/cgroup) && python3 $APP_HOME/app.py',
-          #   ]
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -8277,21 +8266,6 @@ spec:
               value: http://$(OTEL_COLLECTOR_NAME):4317
             - name: OTEL_RESOURCE_ATTRIBUTES
               value: service.name=$(OTEL_SERVICE_NAME),service.instance.id=$(OTEL_K8S_POD_UID),service.namespace=opentelemetry-demo,k8s.namespace.name=$(OTEL_K8S_NAMESPACE),k8s.node.name=$(OTEL_K8S_NODE_NAME),k8s.pod.name=$(OTEL_K8S_POD_NAME)
-            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-              value: "http://appdynamics-otel-collector-service.appdynamics.svc.cluster.local:4318/v1/traces"
-            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-              value: "http://appdynamics-otel-collector-service.appdynamics.svc.cluster.local:4318/v1/traces"
-            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-              value: "http://appdynamics-otel-collector-service.appdynamics.svc.cluster.local:4318/v1/traces"
-            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-              value: "http://appdynamics-otel-collector-service.appdynamics.svc.cluster.local:4318/v1/traces"
-            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-              value: "http://appdynamics-otel-collector-service.appdynamics.svc.cluster.local:4318/v1/traces"
-            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-              value: "http://appdynamics-otel-collector-service.appdynamics.svc.cluster.local:4318/v1/traces"
-            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-              value: "http://appdynamics-otel-collector-service.appdynamics.svc.cluster.local:4318/v1/traces"
-
           resources:
             limits:
               memory: 500Mi
