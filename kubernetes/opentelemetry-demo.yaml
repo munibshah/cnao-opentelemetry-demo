@@ -6025,10 +6025,14 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - nodePort: 32006
+    - name: http-query
+      port: 16686
+      nodePort: 32086
       protocol: TCP
       targetPort: 16686
-    - nodePort: 32005
+    - name: grpc-query
+      port: 16685
+      nodePort: 32085
       protocol: TCP
       targetPort: 16685
   selector:
